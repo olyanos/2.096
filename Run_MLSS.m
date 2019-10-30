@@ -24,6 +24,10 @@ Params.gam2 = ones(n*m,1);   % tuning vector 2
 [Y0] = MLSS_Lin_Solve(Gamma,Lambda,A,Params);
 
 %% Use loop to drive N to 0 for a given rho:
-rho = 0.1;
+rho = 0.1; % scaling newton
 Yt  = Y0;
 [N] = MLSS_NonLin(Yt,Gamma,Lambda,A,Params,rho);
+
+h = 1e-2;
+[newton_sol,k] = Newton(Yt,Gamma,Lambda,A,Params,rho,h)
+fprintf('number of Newton iterations=%d\n',k);
