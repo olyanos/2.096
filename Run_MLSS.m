@@ -36,6 +36,9 @@ rho = 0.1; % scaling newton
 Yt  = Y0;
 [N] = MLSS_NonLin(Yt,Gamma,Lambda,A,Params,rho);
 
-h = 1e-2;
+h = 1e-5;
 [newton_sol,k] = Newton(Yt,Gamma,Lambda,A,Params,rho,h);
 fprintf('number of Newton iterations=%d\n',k);
+
+[newton_sol_jfree,k_jfree] = Newton_JFree(Yt,Gamma,Lambda,A,Params,rho, 1e-09, 1e-5);
+fprintf('number of Newton iterations=%d\n',k_jfree);

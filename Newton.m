@@ -7,11 +7,11 @@ alpha = 1;
 fYt = MLSS_NonLin(Yt,Gamma,Lambda,A,Params,rho);
 dYt = ones(n,1);
 error1 = 1;
-while ( norm (dYt) > 1e-2 & norm (fYt) > 1e-2)
+while ( norm (dYt) > 1e-3 & norm (fYt) > 1e-3)
          fYt = MLSS_NonLin(Yt,Gamma,Lambda,A,Params,rho); % function calculated @ (Yt);
          JYt = compute_Jacobian(Yt,Gamma,Lambda,A,Params,rho,h); % Jacobian calculated @ (Yt);
              
-         % solivng using usual x=A\b command
+         % solving using usual x=A\b command
          dYt = JYt \-fYt;
 
          Yt_new  = Yt + alpha .* dYt;
