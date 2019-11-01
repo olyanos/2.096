@@ -32,13 +32,16 @@ Params.gam2 = ones(n*m,1);   % tuning vector 2
 [Y0] = MLSS_Lin_Solve(Gamma,Lambda,A,Params);
 
 %% Use loop to drive N to 0 for a given rho:
-rho = 0.1; % scaling newton
 Yt  = Y0;
-[N] = MLSS_NonLin(Yt,Gamma,Lambda,A,Params,rho);
+h = 1e-5; % finite diff paramter for numerical Jacobian.
+for rho = 0.1 : 0.1 : 1
+    
+    [N] = MLSS_NonLin(Yt,Gamma,Lambda,A,Params,rho);
+    [newton_sol,k] = Newton(Yt,Gamma,Lambda,A,Params,rho,h)
+    fprintf('number of Newton iterations=%d\n',k);
 
-h = 1e-5;
-[newton_sol,k] = Newton(Yt,Gamma,Lambda,A,Params,rho,h);
-fprintf('number of Newton iterations=%d\n',k);
+    [newton_sol_jfree,k_jfree] = Newton_JFree(Yt,Gamma,Lambda,A,Params,rho, 1e-09, 1e-5)
+    fprintf('number of Newton iterations=%d\n',k_jfree);
 
-[newton_sol_jfree,k_jfree] = Newton_JFree(Yt,Gamma,Lambda,A,Params,rho, 1e-09, 1e-5);
-fprintf('number of Newton iterations=%d\n',k_jfree);
+    Yt = newton_sol;
+end
