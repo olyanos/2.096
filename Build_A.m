@@ -2,10 +2,10 @@ function [A] = Build_A(n)
 % BUILD_A    Build matrix A which converts from x to q via q = Ax
 
 % Inputs:    1) n: number of nodes
-% Outputs:   1) A: conversion matrix
+% Outputs:   1) A: conversion matrix A
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+ 
 m = n-1;
 A = zeros(n*m,n*m);
 
