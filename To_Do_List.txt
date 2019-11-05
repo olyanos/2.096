@@ -1,0 +1,9 @@
+To-do:
+
+1) data for 20 countries
+2) code up time domain solver
+3) Venezuala 2014 - set currency large
+4) cut off trade - see what happend
+5) pick some interesting initial condition - see where market goes
+6) Time constants - pick them
+7) Tune value differential parameters to make currencies match
