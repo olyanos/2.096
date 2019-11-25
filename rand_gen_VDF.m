@@ -3,14 +3,14 @@ tic
 % Nodes
 n = 10;
 m = n-1;
-% Australia, Canada, China, EU, India, Chile, Japan, Mexico, Morocco, Poland
-[Y0_real] = [0.68;0.75;0.14;1.11;0.14;0.13;0.92;0.52;0.10;0.26];
+% Australia, Brazil, Canada, EU, Ghana, Israel,Malysia,Singapore,Switzerland,
+% Turkey
+[Y0_real] = [1.30;3.19;1.30;0.89;4.35;3.60;4.30;1.38;0.98;3.64];
 % Define system parameters and add them to "Params" structure
 Params.n    = n;             % number of nodes
 Params.m    = n-1;           % number of export flows on each node
-Params.y    = [1.43; 1.71; 13.6; 18.8; 2.73;0.298;4.97;1.22;0.118;0.586];     % nodal GDPs (billions)
-Params.P    = [117.898;114.525;121.559;111.247;167.598;128.6239518;...
-               104.9814383;136.5766487;110.8502192;111.6253484];     % nodal CPIs
+Params.y    = [1.33;2.05;1.65;17.3;0.06;0.35;0.315;0.338;0.68;0.85];     % nodal GDPs (billions)
+Params.P    = [115.6867846;155.6687862;111.9848311;109.3524635;232.2564866;106.3806971;119.6050658;113.2661463;98.26686201;174.9687033];     % nodal CPIs
 
 fileID = fopen('distvec.txt', 'r');
 formatSpec = '%f';
@@ -46,7 +46,7 @@ while(error2> 0.5 | isnan(error2) )
     end
     diff_from_origianl = abs(Y0_real - Yt)./Y0_real;
     error;
-    error2= norm(diff_from_origianl,inf);
+    error2= norm(diff_from_origianl,inf)
     Array_errors2 = [Array_errors2;error2];
     error = 1e6;
 end
