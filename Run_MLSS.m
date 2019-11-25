@@ -18,6 +18,16 @@ m = n-1;
  Params.nu = rand(n*m,1);
  Params.yw = rand(1,1)*100;
  
+ % Build special incidence matrix E, Lambda, Gamma and A
+[E,Lambda,Gamma] = Build_ELG(Params.n);
+[A]              = Build_A(Params.n);
+
+ % Load into param structure
+Params.E      = E;
+Params.A      = A;
+Params.Lambda = Lambda;
+Params.Gamma  = Gamma;
+ 
 % Australia, Canada, China, EU, India, Chile, Japan, Mexico, Morocco, Poland
 % Params.y    = [1.43; 1.71; 13.6; 18.8; 2.73; 
 %                 0.298; 4.97; 1.22; 0.118; 0.586];     % nodal GDPs (trillions)
@@ -34,23 +44,19 @@ m = n-1;
 %                 1.2965; 1.8060; 0.8578; 0.3376;
 %                 1.5178; 0.6343; 0.4766; 0.7606;
 %                 1.1529; 0.1558; 1.5679; 0.3409];   % value differential vector
-% Params.yw   = sum(Params.y);          % global GDP
-% Params.gam1 = ones(n*m,1);   % tuning vector 1
-% Params.gam2 = ones(n*m,1);   % tuning vector 2
-
-% Build special incidence matrix E, Lambda, Gamma and A
-[E,Lambda,Gamma] = Build_ELG(Params.n);
-[A]              = Build_A(Params.n);
+Params.yw   = sum(Params.y);          % global GDP
+Params.gam1 = ones(n*m,1);   % tuning vector 1
+Params.gam2 = ones(n*m,1);   % tuning vector 2
 
 %% Solve linear system
-[Y0] = MLSS_Lin_Solve(Gamma,Lambda,A,Params);
+[Y0] = MLSS_Lin_Solve(Params);
 
 %% Use loop to drive N to 0 for a given rho:
 Yt  = Y0;
 h = 1e-5; % finite diff paramter for numerical Jacobian.
 rho = 0.05;
     
-    [N] = MLSS_NonLin(Yt,Gamma,Lambda,A,Params,rho);
+    [N] = MLSS_NonLin(Yt,Params,rho);
     tic; [newton_sol,k, m] = Newton(Yt,Gamma,Lambda,A,Params,rho,h);
     t = toc;
     fprintf('number of Newton iterations=%d\n',k);
