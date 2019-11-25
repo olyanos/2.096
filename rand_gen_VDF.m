@@ -16,15 +16,14 @@ fileID = fopen('distvec.txt', 'r');
 formatSpec = '%f';
 dist = fscanf(fileID, formatSpec);
 Params.d    = reshape(dist,10,9);   % distance vector (km)          
-
 Params.yw   = sum(Params.y);          % global GDP
-
 Params.gam1 = ones(n*m,1);   % tuning vector 1
 Params.gam2 = ones(n*m,1).*0.25;   % tuning vector 2
 Array_errors = ones(1,1)*100;
 Array_errors2 = ones(1,1)*100;
 error2= 1e6;
 error = 1e6;
+
 while(error2> 0.5 | isnan(error2) )
     while (error > 0.6)
         Params.nu = rand(10,9);
