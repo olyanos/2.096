@@ -4,11 +4,11 @@ function [newton_sol,k] = Newton(Yt,Gamma,Lambda,A,Params,rho,h)
 k = 0;
 n = length(Yt);
 alpha = 1;
-fYt = MLSS_NonLin(Yt,Gamma,Lambda,A,Params,rho);
+fYt = MLSS_NonLin(Yt,Params,rho);
 dYt = ones(n,1);
 error1 = 1;
 while ( norm (dYt) > 1e-3 & norm (fYt) > 1e-3)
-         fYt = MLSS_NonLin(Yt,Gamma,Lambda,A,Params,rho); % function calculated @ (Yt);
+         fYt = MLSS_NonLin(Yt,Params,rho); % function calculated @ (Yt);
          JYt = compute_Jacobian(Yt,Gamma,Lambda,A,Params,rho,h); % Jacobian calculated @ (Yt);
              
          % solving using usual x=A\b command
@@ -17,8 +17,8 @@ while ( norm (dYt) > 1e-3 & norm (fYt) > 1e-3)
          Yt_new  = Yt + alpha .* dYt;
          k   = k +1;
          error2 = norm (dYt);
-         error3 = norm (MLSS_NonLin(Yt,Gamma,Lambda,A,Params,rho));
-         error4 = norm (MLSS_NonLin(Yt,Gamma,Lambda,A,Params,rho));
+         error3 = norm (MLSS_NonLin(Yt,Params,rho));
+         error4 = norm (MLSS_NonLin(Yt,Params,rho));
          
          % Adaptive step size
          % this also can be used for MS4 task D

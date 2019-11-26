@@ -15,11 +15,12 @@ Params.P    = [115.6867846;155.6687862;111.9848311;109.3524635;232.2564866;...
 fileID = fopen('distvec.txt', 'r');
 formatSpec = '%f';
 dist = fscanf(fileID, formatSpec);
-Params.d    = reshape(dist,10,9);   % distance vector (km)          
+Params.d    = reshape(dist,90,1);   % distance vector (km)          
 Params.yw   = sum(Params.y);          % global GDP
 Params.gam1 = ones(n*m,1);   % tuning vector 1
 Params.gam2 = ones(n*m,1).*0.2;   % tuning vector 2
-Params.nu = csvread('65percent_accurate.csv'); % diff value factor
+Params.nu = csvread('55percent_accurate.csv'); % diff value factor
+Params.nu = reshape(Params.nu,90,1);
  % Build special incidence matrix E, Lambda, Gamma and A
 [E,Lambda,Gamma] = Build_ELG(Params.n);
 [A]              = Build_A(Params.n);
