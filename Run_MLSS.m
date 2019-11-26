@@ -40,7 +40,7 @@ Params.Gamma  = Gamma;
 Yt  = Y0;
 h = 1e-5; % finite diff paramter for numerical Jacobian.
 for rho = 0.1 : 0.1 : 1     
-    [N] = MLSS_NonLin(Yt,Gamma,Lambda,A,Params,rho);
+    [N] = MLSS_NonLin(Yt,Params,rho);
     [newton_sol,k] = Newton(Yt,Gamma,Lambda,A,Params,rho,h);        
     Yt = newton_sol;
 end
