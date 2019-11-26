@@ -19,7 +19,7 @@ Params.d    = reshape(dist,90,1);   % distance vector (km)
 Params.yw   = sum(Params.y);          % global GDP
 Params.gam1 = ones(n*m,1);   % tuning vector 1
 Params.gam2 = ones(n*m,1).*0.2;   % tuning vector 2
-Params.nu = csvread('55percent_accurate.csv'); % diff value factor
+Params.nu = csvread('60percent_accurate.csv'); % diff value factor
 Params.nu = reshape(Params.nu,90,1);
  % Build special incidence matrix E, Lambda, Gamma and A
 [E,Lambda,Gamma] = Build_ELG(Params.n);
