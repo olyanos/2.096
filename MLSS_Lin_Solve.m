@@ -40,7 +40,7 @@ M3 = M(2:end,1);
 M4 = M(2:end,2:end);
 
 % 5) Assign and solve
-x1 = 1;
+x1 = 1.30;
 xn = -M4\M3*x1;
 Y0 = [x1; xn];
 
