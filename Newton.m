@@ -18,7 +18,7 @@ while ( norm (dYt) > 1e-8 & norm (fYt) > 1e-8)
          k   = k +1;
          error2 = norm (dYt);
          error3 = norm (MLSS_NonLin(Yt,Params,rho));
-         error4 = norm (MLSS_NonLin(Yt,Params,rho));
+         error4 = norm (MLSS_NonLin(Yt_new,Params,rho));
          
          % Adaptive step size
          % this also can be used for MS4 task D
